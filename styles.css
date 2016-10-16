@@ -1,0 +1,58 @@
+h4 {
+  margin: 0;
+}
+
+.navbar-default {
+  background-color: #000;
+  color: #fff;
+  border: 0;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: #fff;
+  border: 0;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav > li > a:hover {
+   color: #f40612;
+}
+
+.navbar-default, .well {
+  border-radius: 0;
+}
+
+.green {
+  color: #299a0b;
+}
+
+.red {
+  color: #ff1a00;
+}
+
+.votes a, .votes a:hover{
+  color: #31B0D5;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.vote-total {
+  margin: 0 2px;
+}
+
+.item-image {
+  width: 150px;
+  height: 150px;
+}
+
+.fa-reddit-alien {
+  color: #f40612;
+}
+
+.item-description {
+  margin: 5px 0;
+  color: #999;
+}

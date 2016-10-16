@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit-Mushrooms</title>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="./bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-moment/angular-moment.js"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+  </head>
+  <body ng-app="shrooms">
+    <div class="wrapper container" ng-controller="mainCtrl">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><i class="fa fa-reddit-alien" aria-hidden="true"></i> Mushrooms</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Submit Post <i class="fa fa-plus" aria-hidden="true"></i></a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filter <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#" ng-click="sortBy('votes')">Votes</a></li>
+                  <li><a href="#" ng-click="sortBy('date')">Date</a></li>
+                  <li><a href="#" ng-click="sortBy('title')">Title</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchShrooms">
+              </div>
+              <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div ng-repeat="item in data | orderBy:propertyName:reverse | filter:searchShrooms" class="media well">
+        <div class="media-left">
+          <img ng-src="{{ item.picture }}" alt="{{ item.title }}" class="item-image"/>
+        </div>
+        <div class="media-body">
+          <h4>{{ item.title }} | <strong class="vote-total" ng-class="item.votes ? item.votes < 0 ? 'red' : 'green' : ''">{{ item.votes }}</strong></h4>
+          <span class="pull-right">By: {{ item.author }}</span>
+          <div class="votes">
+              <a ng-click="upvote(item.id)"><span><i class="fa fa-arrow-up" aria-hidden="true"></i> Upvote</span></a>
+              <a ng-click="downvote(item.id)"><span><i class="fa fa-arrow-down" aria-hidden="true"></i> Downvote</span></a>
+          </div>
+          <p class="item-description">{{ item.description }}</p>
+          <span class="item-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span am-time-ago={{item.date}}></span></span> |
+          <span class="item-comments"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments {{ item.comments.length }}</span> |
+          <span class="item-add-comment"><i class="fa fa-pencil" aria-hidden="true"></i> Add Comment</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
