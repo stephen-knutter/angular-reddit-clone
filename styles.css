@@ -1,5 +1,16 @@
+body {
+  background-color: #f4f4f4;
+}
+
 h4 {
   margin: 0;
+}
+
+.wrapper{
+  padding: 10px 30px;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 
 .navbar-default {
@@ -21,10 +32,6 @@ h4 {
    color: #f40612;
 }
 
-.navbar-default, .well {
-  border-radius: 0;
-}
-
 .green {
   color: #299a0b;
 }
@@ -33,14 +40,25 @@ h4 {
   color: #ff1a00;
 }
 
-.votes a, .votes a:hover{
+.blue-link, .blue-link:hover {
   color: #31B0D5;
   cursor: pointer;
   text-decoration: none;
 }
 
-.votes a:hover {
+.blue-link:hover {
   color: #337ab7;
+}
+
+.gray-link {
+  color: #000;
+  text-decoration: none;
+}
+
+.gray-link:hover  {
+  color: #666;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .vote-total {
@@ -59,4 +77,36 @@ h4 {
 .item-description {
   margin: 5px 0;
   color: #999;
+}
+
+.form-head {
+  color: #000;
+}
+
+.form-item {
+  padding: 10px;
+  margin: 0;
+}
+
+.ng-invalid.ng-touched {
+  border: 1px solid red;
+  background-color: pink;
+}
+
+.comments {
+  padding-top: 5px;
+}
+
+.comment, .comment-form {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  max-width: 400px;
+}
+
+.comment-text {
+  font-size: 12px;
+}
+
+.add-btn {
+  margin-top: 5px;
 }

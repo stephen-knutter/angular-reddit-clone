@@ -29,9 +29,38 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="#">Submit Post <i class="fa fa-plus" aria-hidden="true"></i></a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filter <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Add Post <i class="fa fa-plus" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li class="form-item">
+                    <h4 class="form-head">Add Shroom</h4>
+                    <form class="" ng-submit="addPost()">
+                      <div class="form-group">
+                        <input type="text" class="form-control" ng-model="post.title" name="title" placeholder="Title..." required/>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" ng-model="post.author" name="author" placeholder="Author..." required/>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" ng-model="post.picture" name="picture" placeholder="Picture..." required/>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" ng-model="post.description" name="description" placeholder="Description..." required/>
+                      </div>
+                      <input type="submit" name="submit" class="btn btn-primary btn-sm btn-block" value="Add Shroom" />
+                    </form>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchShrooms">
+                  </div>
+                </form>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sort By {{ propertyName }} <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#" ng-click="sortBy('votes')">Votes</a></li>
                   <li><a href="#" ng-click="sortBy('date')">Date</a></li>
@@ -39,12 +68,6 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" ng-model="searchShrooms">
-              </div>
-              <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-            </form>
           </div>
         </div>
       </nav>
@@ -57,13 +80,27 @@
           <h4>{{ item.title }} | <strong class="vote-total" ng-class="item.votes ? item.votes < 0 ? 'red' : 'green' : ''">{{ item.votes }}</strong></h4>
           <span class="pull-right">By: {{ item.author }}</span>
           <div class="votes">
-              <a ng-click="upvote(item.id)"><span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</span></a>
-              <a ng-click="downvote(item.id)"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Downvote</span></a>
+              <a ng-click="upvote(item.id)" class="blue-link"><span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</span></a>
+              <a ng-click="downvote(item.id)" class="blue-link"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Downvote</span></a>
           </div>
           <p class="item-description">{{ item.description }}</p>
-          <span class="item-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span am-time-ago={{item.date}}></span></span> |
-          <span class="item-comments"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments {{ item.comments.length }}</span> |
-          <span class="item-add-comment"><i class="fa fa-pencil" aria-hidden="true"></i> Add Comment</span>
+          <span class="item-date"> <i class="fa fa-calendar-o" aria-hidden="true"></i> <span am-time-ago={{item.date}}></span></span> |
+          <span class="item-comments"><a ng-click="showComments(item.id)" class="gray-link"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments {{ item.comments.length }}</a></span> |
+          <span class="item-add-comment"><a ng-click="showForm(item.id)" class="blue-link"><i class="fa fa-pencil" aria-hidden="true"></i> Add Comment</a></span>
+          <div class="comment-form clearfix" ng-show="showCommentForm[item.id]">
+            <form ng-submit="addComment(item.id)">
+              <strong>Author:</strong>
+              <input type="text" name="author" class="form-control" ng-model="comment.author" placeholder="Author..."  required/>
+              <strong>Comment:</strong>
+              <input type="text" name="text" class="form-control" ng-model="comment.text" placeholder="Comment..." required/>
+              <input type="submit" name="add" class="btn btn-default pull-right add-btn" value="Add Comment">
+            </form>
+          </div>
+          <div class="comments" ng-show="showCommentsList[item.id]">
+            <div class="comment" ng-repeat="comment in item.comments">
+              <strong>{{ comment.author }}</strong> <span class="comment-text">{{ comment.text }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
