@@ -31,7 +31,7 @@
             <ul class="nav navbar-nav">
               <li><a href="#">Submit Post <i class="fa fa-plus" aria-hidden="true"></i></a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filter <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Filter <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#" ng-click="sortBy('votes')">Votes</a></li>
                   <li><a href="#" ng-click="sortBy('date')">Date</a></li>
@@ -57,8 +57,8 @@
           <h4>{{ item.title }} | <strong class="vote-total" ng-class="item.votes ? item.votes < 0 ? 'red' : 'green' : ''">{{ item.votes }}</strong></h4>
           <span class="pull-right">By: {{ item.author }}</span>
           <div class="votes">
-              <a ng-click="upvote(item.id)"><span><i class="fa fa-arrow-up" aria-hidden="true"></i> Upvote</span></a>
-              <a ng-click="downvote(item.id)"><span><i class="fa fa-arrow-down" aria-hidden="true"></i> Downvote</span></a>
+              <a ng-click="upvote(item.id)"><span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote</span></a>
+              <a ng-click="downvote(item.id)"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> Downvote</span></a>
           </div>
           <p class="item-description">{{ item.description }}</p>
           <span class="item-date"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span am-time-ago={{item.date}}></span></span> |
