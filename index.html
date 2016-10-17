@@ -34,18 +34,18 @@
                 <ul class="dropdown-menu" role="menu">
                   <li class="form-item">
                     <h4 class="form-head">Add Shroom</h4>
-                    <form class="" ng-submit="addPost()">
+                    <form name="newForm" ng-submit="addPost(newForm)">
                       <div class="form-group">
-                        <input type="text" class="form-control" ng-model="post.title" name="title" placeholder="Title..." required/>
+                        <input type="text" ng-class="{titleError: 'error'}" class="form-control" ng-model="post.title" name="title" placeholder="Title..." required/>
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control" ng-model="post.author" name="author" placeholder="Author..." required/>
+                        <input type="text" ng-class="{authorError: 'error'}" class="form-control" ng-model="post.author" name="author" placeholder="Author..." required/>
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control" ng-model="post.picture" name="picture" placeholder="Picture..." required/>
+                        <input type="text" ng-class="{pictureError: 'error'}" class="form-control" ng-model="post.picture" name="picture" placeholder="Picture..." required/>
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control" ng-model="post.description" name="description" placeholder="Description..." required/>
+                        <input type="text" ng-class="{descriptionError: 'error'}" class="form-control" ng-model="post.description" name="description" placeholder="Description..." required/>
                       </div>
                       <input type="submit" name="submit" class="btn btn-primary btn-sm btn-block" value="Add Shroom" />
                     </form>
@@ -88,11 +88,11 @@
           <span class="item-comments"><a ng-click="showComments(item.id)" class="gray-link"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments {{ item.comments.length }}</a></span> |
           <span class="item-add-comment"><a ng-click="showForm(item.id)" class="blue-link"><i class="fa fa-pencil" aria-hidden="true"></i> Add Comment</a></span>
           <div class="comment-form clearfix" ng-show="showCommentForm[item.id]">
-            <form ng-submit="addComment(item.id)">
+            <form ng-submit="addComment(item.id, commentForm)" name="commentForm">
               <strong>Author:</strong>
-              <input type="text" name="author" class="form-control" ng-model="comment.author" placeholder="Author..."  required/>
+              <input type="text" name="author" ng-class="{authorError: 'error'}" class="form-control" ng-model="comment.author" placeholder="Author..."  required/>
               <strong>Comment:</strong>
-              <input type="text" name="text" class="form-control" ng-model="comment.text" placeholder="Comment..." required/>
+              <input type="text" name="text" ng-class="{textError: 'error'}" class="form-control" ng-model="comment.text" placeholder="Comment..." required/>
               <input type="submit" name="add" class="btn btn-default pull-right add-btn" value="Add Comment">
             </form>
           </div>

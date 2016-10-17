@@ -37,18 +37,28 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
     $scope.searchShrooms = '';
 
     //Add post
-    $scope.addPost = () => {
+    $scope.addPost = (newForm) => {
       let title = $scope.post.title,
           author = $scope.post.author,
           picture = $scope.post.picture,
           description = $scope.post.description;
 
-      if (!title || !author || !picture || !description) return false;
+      if (!title || !author || !picture || !description) {
+        !title ? $scope.titleError = true : '';
+        !author ? $scope.authorError = true : '';
+        !picture ? $scope.pictureError = true : '';
+        !description ? $scope.descriptionError = true : '';
+        return false;
+      }
+
+      $scope.titleError = $scope.authorError = $scope.pictureError = $scope.descriptionError = false;
 
       $scope.post.comments = [];
       $scope.post.votes = 0;
       $scope.post.date = new Date();
       $scope.data.unshift($scope.post);
+      newForm.$setPristine();
+      newForm.$setUntouched();
       $scope.post = {};
       $('body').click();
     }
@@ -67,11 +77,17 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
 
     //Add comment
     $scope.comment = {};
-    $scope.addComment = (id) => {
+    $scope.addComment = (id, comForm) => {
       let author = $scope.comment.author,
           text = $scope.comment.text
 
-      if (!author || !text) return false;
+      if (!author || !text){
+        !author ? $scope.authorError = true : '';
+        !text ? $scope.textError = true : '';
+        return false;
+      }
+
+      $scope.authorError = $scope.textError = false;
 
       for (let i in $scope.data) {
         let current = $scope.data[i];
