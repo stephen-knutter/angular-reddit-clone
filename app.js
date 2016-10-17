@@ -44,10 +44,10 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
           description = $scope.post.description;
 
       if (!title || !author || !picture || !description) {
-        !title ? $scope.titleError = true : '';
-        !author ? $scope.authorError = true : '';
-        !picture ? $scope.pictureError = true : '';
-        !description ? $scope.descriptionError = true : '';
+        $scope.titleError = !title ? true : false;
+        $scope.authorError = !author ?  true : false;
+        $scope.pictureError = !picture ? true : false;
+        $scope.descriptionError = !description ?  true : false;
         return false;
       }
 
@@ -82,8 +82,8 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
           text = $scope.comment.text
 
       if (!author || !text){
-        !author ? $scope.authorError = true : '';
-        !text ? $scope.textError = true : '';
+        $scope.authorError = !author ?  true : false;
+        $scope.textError = !text ?  true : false;
         return false;
       }
 

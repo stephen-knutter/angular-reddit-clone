@@ -85,7 +85,8 @@
           </div>
           <p class="item-description">{{ item.description }}</p>
           <span class="item-date"> <i class="fa fa-calendar-o" aria-hidden="true"></i> <span am-time-ago={{item.date}}></span></span> |
-          <span class="item-comments"><a ng-click="showComments(item.id)" class="gray-link"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments {{ item.comments.length }}</a></span> |
+          <span class="item-comments"><a ng-click="showComments(item.id)" class="gray-link"><i class="fa fa-comments-o" aria-hidden="true"></i>
+            Comment<ng-pluralize count="item.comments.length" when="{'0': 's', 'one': '', 'other': 's'}"></ng-pluralize> {{ item.comments.length }}</a></span> |
           <span class="item-add-comment"><a ng-click="showForm(item.id)" class="blue-link"><i class="fa fa-pencil" aria-hidden="true"></i> Add Comment</a></span>
           <div class="comment-form clearfix" ng-show="showCommentForm[item.id]">
             <form ng-submit="addComment(item.id, commentForm)" name="commentForm">
