@@ -8,23 +8,15 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
 
     //Voting
     $scope.upvote = (id) => {
-      for (let i in $scope.data) {
-        let current = $scope.data[i];
-        if (current.id == id) {
-          current.votes++;
-          return;
-        };
-      }
+      $scope.data.filter((obj) => {
+        return obj.id == id
+      })[0].votes++
     };
 
     $scope.downvote = (id) => {
-      for (let i in $scope.data) {
-        let current = $scope.data[i];
-        if (current.id == id) {
-          current.votes--;
-          return;
-        };
-      }
+      $scope.data.filter((obj) => {
+        return obj.id == id
+      })[0].votes--
     };
 
     //Filter
@@ -37,7 +29,7 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
     $scope.searchShrooms = '';
 
     //Add post
-    $scope.addPost = (newForm) => {
+    $scope.addPost = () => {
       let title = $scope.post.title,
           author = $scope.post.author,
           picture = $scope.post.picture,
@@ -57,8 +49,6 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
       $scope.post.votes = 0;
       $scope.post.date = new Date();
       $scope.data.unshift($scope.post);
-      newForm.$setPristine();
-      newForm.$setUntouched();
       $scope.post = {};
       $('body').click();
     }
@@ -77,7 +67,7 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
 
     //Add comment
     $scope.comment = {};
-    $scope.addComment = (id, comForm) => {
+    $scope.addComment = (id) => {
       let author = $scope.comment.author,
           text = $scope.comment.text
 
@@ -89,15 +79,12 @@ app.controller('mainCtrl', ['$scope', '$filter', 'data', 'moment',
 
       $scope.authorError = $scope.textError = false;
 
-      for (let i in $scope.data) {
-        let current = $scope.data[i];
-        if (current.id == id) {
-          current.comments.push($scope.comment);
-          $scope.showComments(id);
-          $scope.comment = {};
-          return;
-        }
-      }
+      $scope.data.filter((obj) => {
+        return obj.id == id
+      })[0].comments.push($scope.comment);
+
+      $scope.showComments(id);
+      $scope.comment = {};
     };
   }]);
 
